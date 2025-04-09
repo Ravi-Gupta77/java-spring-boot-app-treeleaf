@@ -1,7 +1,8 @@
 replicaCount: 2
 image:
   repository: 905418041725.dkr.ecr.ap-south-1.amazonaws.com/dev-java-springboot
-  tag: latest
+  # tag: latest
+  tag: ${{ github.sha }}
 
 resources:
   requests:
@@ -23,3 +24,4 @@ service:
 persistentVolume:
   enabled: true
   size: 5Gi
+
