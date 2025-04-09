@@ -9,11 +9,17 @@ on:
     branches:
       - qa
       - main
+    paths-ignore:
+      - 'README.md'
+      - 'helm/**'
 
   pull_request:
     branches:
       - main
       - qa
+    paths-ignore:
+      - 'README.md'
+      - 'helm/**'
 
 permissions:
   id-token: write
