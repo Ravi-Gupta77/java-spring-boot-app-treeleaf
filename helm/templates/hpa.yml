@@ -2,12 +2,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ .Chart.Name }}-hpa
+  name: {{ .Release.Name }}-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ .Chart.Name }}
+    name: {{ .Release.Name }}
   minReplicas: {{ .Values.hpa.minReplicas }}
   maxReplicas: {{ .Values.hpa.maxReplicas }}
   metrics:
@@ -18,6 +18,3 @@ spec:
         type: Utilization
         averageUtilization: {{ .Values.hpa.targetCPUUtilization }}
 {{- end }}
-
-docker tag dev-java-springboot:latest 905418041725.dkr.ecr.ap-south-1.amazonaws.com/dev-java-springboot:latest
-
