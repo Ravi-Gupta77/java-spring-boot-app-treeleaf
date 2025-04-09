@@ -72,7 +72,7 @@ jobs:
           helm upgrade --install dev-java-springboot-app ./helm \
             --set image.repository=${ECR_REGISTRY}/dev-java-springboot-app \
             --set image.tag=${IMAGE_TAG} \
-            --namespace dev \ 
+            --namespace dev \
             --create-namespace
 
 
