@@ -9,14 +9,6 @@ on:
       - 'README.md'
       - '.git*'
 
-  pull_request:
-    branches: 
-      - main
-      - qa
-    paths-ignore:
-      - 'README.md'
-      - '.git*'
-
 permissions:
   id-token: write
   contents: read
