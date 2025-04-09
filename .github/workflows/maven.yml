@@ -1,0 +1,66 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+name: project cicd flow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: '1.8'
+        distribution: 'adopt'
+        cache: maven
+    - name: Build with Maven
+      run: mvn clean install
+
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: javatechie/springboot-images-new
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+# .github/workflows/ci-cd.yml
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with: { java-version: '17' }
+      - name: Build with Maven
+        run: mvn package -DskipTests
+      - name: Build Docker Image
+        run: docker build -t my-spring-app:${{ github.sha }} .
+      - name: Push to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker tag my-spring-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-spring-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-spring-app:latest
+      - name: Deploy to Kubernetes
+        run: |
+          helm upgrade --install my-spring-app ./helm \
+            --set image.repository=${{ secrets.DOCKER_USERNAME }}/my-spring-app \
+            --set image.tag=latest \
+            --namespace=prod --create-namespace
