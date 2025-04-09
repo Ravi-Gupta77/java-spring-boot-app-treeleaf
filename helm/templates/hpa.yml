@@ -19,5 +19,5 @@ spec:
         averageUtilization: {{ .Values.hpa.targetCPUUtilization }}
 {{- end }}
 
-
+docker tag dev-java-springboot:latest 905418041725.dkr.ecr.ap-south-1.amazonaws.com/dev-java-springboot:latest
 

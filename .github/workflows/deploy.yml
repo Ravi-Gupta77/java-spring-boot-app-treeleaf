@@ -49,15 +49,15 @@ jobs:
         run: mvn package -DskipTests
 
       - name: Build Docker Image
-        run: docker build -t dev-java-springboot-app .
+        run: docker build -t dev-java-springboot-app:latest .
 
       - name: Tag and Push Docker Image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: dev-java-springboot
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: latest
         run: |
-          docker tag dev-java-springboot-app:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
+          docker tag dev-java-springboot:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
           docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
 
       - name: Update kubeconfig for EKS
