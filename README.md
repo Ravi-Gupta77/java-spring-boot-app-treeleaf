@@ -16,8 +16,17 @@ The docker image optimized for multi-stage build & was tested locally
 </p>
 
 ## Architecture diagram
+The application is deployed into aws EKS using helm chart. This architecture diagram shows the overview of entire process
 
+The initial approach for deployment involves build the docker image via github action which is push into ECR, then helm chart deploys it into EKS cluster. For better monitoring prometheus scrapes the metrics from EKS which is then visualize in Grafana dashboard
+
+The entire infrastructure in aws cloud is provisioned using Terraform
+```https://github.com/Ravi-Gupta77/terraform-java-springboot-infra.git```
 
 <p align="center">
   <img src="./diagram.png" alt="Architecture Design" width="80%">
 </p>
+
+
+
+
