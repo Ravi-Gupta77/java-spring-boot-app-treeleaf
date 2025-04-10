@@ -3,6 +3,7 @@
 This is the somple java springboot app which is dockerized & deployed into EKS cluster using helm
 
 The docker image optimized for multi-stage build & was tested locally
+
 ### Build image
   ```hcl
   docker build -t java-springboot-app:latest .
@@ -22,7 +23,7 @@ The initial approach for deployment involves build the docker image via github a
 
 The entire infrastructure in aws cloud is provisioned using Terraform:
 
-Link
+Link: 
 [terraform-java-springboot-infra](https://github.com/Ravi-Gupta77/terraform-java-springboot-infra.git)
 
 <p align="center">
