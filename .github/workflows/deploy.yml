@@ -8,15 +8,7 @@ on:
     paths-ignore:
       - 'README.md'
       - '.git*'
-
-
-  pull_request:
-    branches: 
-      - main
-      - qa
-    paths-ignore:
-      - 'README.md'
-      - '.git*'
+      - '*.png'
 
 permissions:
   id-token: write
@@ -39,6 +31,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -50,29 +44,40 @@ jobs:
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build with Maven
         run: mvn package -DskipTests
 
+      - name: Generate unique image tag
+        id: tag
+        run: echo "tag=${{ github.sha }}-$(date +%s)" >> $GITHUB_OUTPUT
+      
       - name: Build Docker Image
-        run: docker build -t my-spring-app:${{ github.sha }} .
+        run: docker build -t dev-java-springboot-app:${{ steps.tag.outputs.tag }} .
 
       - name: Tag and Push Docker Image to ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: my-spring-app
-          IMAGE_TAG: ${{ github.sha }}
+          ECR_REPOSITORY: dev-java-springboot
+          IMAGE_TAG: ${{ steps.tag.outputs.tag }}
         run: |
-          docker tag my-spring-app:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
+          docker tag dev-java-springboot-app:${IMAGE_TAG} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
           docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
 
-      - name: Deploy to Kubernetes
+      - name: Update kubeconfig for EKS
+        run: |
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name java-springboot-app
+          
+      - name: Deploy to EKS using helm
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ steps.tag.outputs.tag }}
         run: |
-          helm upgrade --install my-spring-app ./helm \
-            --set image.repository=${ECR_REGISTRY}/my-spring-app \
+          helm upgrade --install dev-java-springboot-app ./helm \
+            --set image.repository=${ECR_REGISTRY}/dev-java-springboot-app \
             --set image.tag=${IMAGE_TAG} \
-            --namespace=prod --create-namespace
+            --namespace dev \
+            --create-namespace
+
+
