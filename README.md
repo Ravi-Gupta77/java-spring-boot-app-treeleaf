@@ -35,4 +35,26 @@ Link:
   <img src="./images/eks-01.png" alt="eks 01" width="80%">
 </p>
 
+<p align="center">
+  <img src="./images/ec2-01.png" alt="ec2 01" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/eks-02.png" alt="eks 02" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/ecr-01.png" alt="ecr 01" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/vpc-01.png" alt="vpc 01" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/elb-01.png" alt="elb 01" width="80%">
+</p>
+
+
+
 
