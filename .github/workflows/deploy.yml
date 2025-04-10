@@ -8,7 +8,7 @@ on:
     paths-ignore:
       - 'README.md'
       - '.git*'
-      - '*.png'
+      - 'images/*'
 
 permissions:
   id-token: write
