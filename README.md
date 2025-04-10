@@ -12,7 +12,7 @@ The docker image optimized for multi-stage build & was tested locally
   docker run -d --name -java-springboot-app -p 8090:8080 java-springboot-app
   ```
 <p align="center">
-  <img src="./diagram.png" alt="Architecture Design" width="80%">
+  <img src="./deploy.png" alt="deploy localhost" width="80%">
 </p>
 
 <p align="center">
