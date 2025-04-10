@@ -32,7 +32,7 @@ Link:
 
 ###screenshot
 <p align="center">
-  <img src="./eks-01.png" alt="Architecture Design" width="80%">
+  <img src="./eks-01.png" alt="eks 01" width="80%">
 </p>
 
 
