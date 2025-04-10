@@ -30,6 +30,9 @@ Link:
   <img src="./diagram.png" alt="Architecture Design" width="80%">
 </p>
 
-
+###screenshot
+<p align="center">
+  <img src="./eks-01.png" alt="Architecture Design" width="80%">
+</p>
 
 
