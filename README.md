@@ -22,7 +22,7 @@ The initial approach for deployment involves build the docker image via github a
 
 The entire infrastructure in aws cloud is provisioned using Terraform
 
-```https://github.com/Ravi-Gupta77/terraform-java-springboot-infra.git```
+[terraform-java-springboot-infra](https://github.com/Ravi-Gupta77/terraform-java-springboot-infra.git)
 
 <p align="center">
   <img src="./diagram.png" alt="Architecture Design" width="80%">
