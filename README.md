@@ -21,6 +21,7 @@ The application is deployed into aws EKS using helm chart. This architecture dia
 The initial approach for deployment involves build the docker image via github action which is push into ECR, then helm chart deploys it into EKS cluster. For better monitoring prometheus scrapes the metrics from EKS which is then visualize in Grafana dashboard
 
 The entire infrastructure in aws cloud is provisioned using Terraform
+
 ```https://github.com/Ravi-Gupta77/terraform-java-springboot-infra.git```
 
 <p align="center">
