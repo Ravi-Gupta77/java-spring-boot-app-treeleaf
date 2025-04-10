@@ -15,6 +15,9 @@ The docker image optimized for multi-stage build & was tested locally
   <img src="./deploy.png" alt="deploy localhost" width="80%">
 </p>
 
+## Architecture diagram
+
+
 <p align="center">
   <img src="./diagram.png" alt="Architecture Design" width="80%">
 </p>
