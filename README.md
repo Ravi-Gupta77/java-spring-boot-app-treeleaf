@@ -13,7 +13,7 @@ The docker image optimized for multi-stage build & was tested locally
   docker run -d --name -java-springboot-app -p 8090:8080 java-springboot-app
   ```
 <p align="center">
-  <img src="./deploy.png" alt="deploy localhost" width="80%">
+  <img src="./images/deploy.png" alt="deploy localhost" width="80%">
 </p>
 
 ## Architecture diagram
@@ -27,12 +27,12 @@ Link:
 [terraform-java-springboot-infra](https://github.com/Ravi-Gupta77/terraform-java-springboot-infra.git)
 
 <p align="center">
-  <img src="./diagram.png" alt="Architecture Design" width="80%">
+  <img src="./images/diagram.png" alt="Architecture Design" width="80%">
 </p>
 
-###screenshot
+### screenshots
 <p align="center">
-  <img src="./eks-01.png" alt="eks 01" width="80%">
+  <img src="./images/eks-01.png" alt="eks 01" width="80%">
 </p>
 
 
