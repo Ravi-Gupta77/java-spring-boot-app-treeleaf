@@ -1,24 +1,22 @@
-# Use a multi-stage build to keep the image small
-
-#
+# Using OpenJDK 17 base image
 FROM eclipse-temurin:17 AS builder
 
 #Set the working dir
 WORKDIR /app
 
-# Copy and build the app
+# Copy apps code
 COPY . .
 
-
+# Runs the Maven wrapper to package app into .jar file.
 RUN ./mvnw package -DskipTests
 
-# Second stage: run the app
+# Using Temurin JDK 17 image
 FROM eclipse-temurin:17-jdk-jammy
 
 # Set working dir
 WORKDIR /app
 
-
+# Copy jar file from build stage
 COPY --from=builder /app/target/*.jar app.jar
 
 # Expose port

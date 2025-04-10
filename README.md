@@ -3,6 +3,7 @@
 This is the somple java springboot app which is dockerized & deployed into EKS cluster using helm
 
 The docker image optimized for multi-stage build & was tested locally
+
 ### Build image
   ```hcl
   docker build -t java-springboot-app:latest .
@@ -12,7 +13,7 @@ The docker image optimized for multi-stage build & was tested locally
   docker run -d --name -java-springboot-app -p 8090:8080 java-springboot-app
   ```
 <p align="center">
-  <img src="./deploy.png" alt="deploy localhost" width="80%">
+  <img src="./images/deploy.png" alt="deploy localhost" width="80%">
 </p>
 
 ## Architecture diagram
@@ -22,11 +23,36 @@ The initial approach for deployment involves build the docker image via github a
 
 The entire infrastructure in aws cloud is provisioned using Terraform:
 
-Link
+Link: 
 [terraform-java-springboot-infra](https://github.com/Ravi-Gupta77/terraform-java-springboot-infra.git)
 
 <p align="center">
-  <img src="./diagram.png" alt="Architecture Design" width="80%">
+  <img src="./images/diagram.png" alt="Architecture Design" width="80%">
+</p>
+
+### screenshots
+<p align="center">
+  <img src="./images/eks-01.png" alt="eks 01" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/ec2-01.png" alt="ec2 01" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/eks-02.png" alt="eks 02" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/ecr-01.png" alt="ecr 01" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/vpc-01.png" alt="vpc 01" width="80%">
+</p>
+
+<p align="center">
+  <img src="./images/elb-01.png" alt="elb 01" width="80%">
 </p>
 
 
